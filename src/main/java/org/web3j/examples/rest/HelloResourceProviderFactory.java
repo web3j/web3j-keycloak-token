@@ -11,7 +11,7 @@ import org.keycloak.services.resource.RealmResourceProviderFactory;
  */
 public class HelloResourceProviderFactory implements RealmResourceProviderFactory {
 
-    public static final String ID = "hello";
+    public static final String ID = "hello-rest";
 
     @Override
     public String getId() {
