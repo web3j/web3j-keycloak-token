@@ -1,1 +1,2 @@
 org.web3j.examples.rest.HelloResourceProviderFactory
+org.web3j.examples.domain.rest.ExampleRealmResourceProviderFactory

@@ -5,6 +5,7 @@ import org.keycloak.models.*;
 import org.keycloak.services.managers.*;
 
 public class ExampleRestResource {
+
     private final KeycloakSession session;
     private final AuthenticationManager.AuthResult auth;
 

@@ -11,6 +11,7 @@ import org.web3j.examples.domain.spi.*;
 
 public class ExampleServiceImpl implements ExampleService {
 
+
     private final KeycloakSession session;
 
     public ExampleServiceImpl(KeycloakSession session) {

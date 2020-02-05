@@ -6,6 +6,7 @@ import org.keycloak.models.*;
 
 public class ExampleJpaEntityProviderFactory implements JpaEntityProviderFactory{
 
+
     protected static final String ID = "example-entity-provider";
 
     @Override
@@ -13,15 +14,9 @@ public class ExampleJpaEntityProviderFactory implements JpaEntityProviderFactory
         return new ExampleJpaEntityProvider();
     }
 
-
     @Override
     public String getId() {
         return ID;
-    }
-
-    @Override
-    public int order() {
-        return 0;
     }
 
     @Override
