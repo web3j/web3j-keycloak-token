@@ -13,7 +13,7 @@ public class TokenEntityProvider implements JpaEntityProvider {
 
     @Override
     public String getChangelogLocation() {
-        return null;
+        return "META-INF/token-changelog.xml";
     }
 
     @Override
