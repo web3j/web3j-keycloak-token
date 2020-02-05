@@ -1,5 +1,6 @@
 package org.web3j.examples.rest;
 
+import org.keycloak.connections.jpa.JpaConnectionProvider;
 import org.keycloak.email.EmailException;
 import org.keycloak.email.EmailSenderProvider;
 import org.keycloak.models.KeycloakContext;
@@ -8,6 +9,7 @@ import org.keycloak.models.RealmModel;
 import org.keycloak.models.UserModel;
 import org.keycloak.services.resource.RealmResourceProvider;
 
+import javax.persistence.EntityManager;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
@@ -39,7 +41,7 @@ public class HelloResourceProvider implements RealmResourceProvider {
     @Path("")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces("text/plain; charset=utf-8")
-    public String get(@FormParam("email") String email) throws EmailException {
+    public String createUserToken(@FormParam("email") String email) throws EmailException {
 
         Map<String, String> config = session.getContext().getRealm().getSmtpConfig();
         RealmModel realmModel = session.getContext().getRealm();
@@ -48,9 +50,19 @@ public class HelloResourceProvider implements RealmResourceProvider {
             userModel = session.users().addUser(realmModel, UUID.randomUUID().toString(), email, false, false);
             userModel.setEmail(email);
         }
+
+        String userId = userModel.getId();
+
+        Web3jToken token = new Web3jToken();
+        token.setUserId(userId);
+        token.setToken(UUID.randomUUID().toString());
+
+        EntityManager em = session.getProvider(JpaConnectionProvider.class).getEntityManager();
+        em.persist(token);
+
         session.getProvider(EmailSenderProvider.class).send(config, userModel, "Email Validation", "Please validate your account", "Please validate your account");
 
-        return userModel.getFirstName();
+        return token.getToken();
     }
 
     @Override

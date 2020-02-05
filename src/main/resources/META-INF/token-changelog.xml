@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet author="web3labs" id="web3j-token-1.0">
+
+        <createTable tableName="WEB3J_TOKENS">
+            <column name="TOKEN" type="CHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USER_ID" type="CHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="INFURA_PROJECT" type="VARCHAR(64)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="ACTIVE" type="BOOL">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey
+                constraintName="PK_TOKEN"
+                tableName="WEB3J_TOKENS"
+                columnNames="TOKEN"
+        />
+
+    </changeSet>
+
+</databaseChangeLog>
